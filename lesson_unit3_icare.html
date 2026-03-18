@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 3 – I Care | שיעור אנגלית</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #6c3fc5;
+    --purple-light: #9b6ee8;
+    --purple-pale: #f0eaff;
+    --blue: #2e7cf6;
+    --blue-pale: #eaf2ff;
+    --green: #22b573;
+    --green-pale: #e8f9f2;
+    --red: #e5344a;
+    --red-pale: #ffeaed;
+    --yellow: #f5a623;
+    --yellow-pale: #fff8e6;
+    --gray: #64748b;
+    --bg: #f7f5ff;
+    --card: #ffffff;
+    --text: #1e1b2e;
+    --border: #e2d9f3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Rubik', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    direction: rtl;
+  }
+  header {
+    background: linear-gradient(135deg, var(--purple) 0%, #9b59b6 100%);
+    color: #fff;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(108,63,197,0.3);
+  }
+  header h1 { font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: 900; }
+  header .subtitle { font-size: 0.85rem; opacity: 0.85; margin-top: 2px; }
+  .score-badge {
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .score-badge:hover { background: rgba(255,255,255,0.35); }
+
+  /* TABS */
+  .tabs-wrapper {
+    background: #fff;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    overflow-x: auto;
+  }
+  .tabs {
+    display: flex;
+    gap: 0;
+    min-width: max-content;
+  }
+  .tab-btn {
+    padding: 14px 20px;
+    border: none;
+    background: none;
+    font-family: 'Rubik', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    position: relative;
+  }
+  .tab-btn:hover { color: var(--purple); background: var(--purple-pale); }
+  .tab-btn.active { color: var(--purple); border-bottom-color: var(--purple); }
+  .tab-btn .tab-icon { margin-left: 6px; font-size: 1rem; }
+  .tab-btn .done-mark {
+    position: absolute;
+    top: 6px; left: 6px;
+    width: 10px; height: 10px;
+    background: var(--green);
+    border-radius: 50%;
+    display: none;
+  }
+  .tab-btn.completed .done-mark { display: block; }
+
+  /* CONTENT */
+  .content { max-width: 900px; margin: 0 auto; padding: 28px 16px 60px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* INTRO */
+  .intro-card {
+    background: linear-gradient(135deg, var(--purple) 0%, #7e57d9 100%);
+    color: #fff;
+    border-radius: 18px;
+    padding: 28px 30px;
+    margin-bottom: 24px;
+  }
+  .intro-card h2 { font-family: 'Nunito', sans-serif; font-size: 1.4rem; font-weight: 900; margin-bottom: 12px; }
+  .intro-card p { line-height: 1.8; font-size: 1rem; opacity: 0.95; }
+
+  .info-box {
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+    border-right: 5px solid;
+  }
+  .info-box.blue { background: var(--blue-pale); border-color: var(--blue); }
+  .info-box.purple { background: var(--purple-pale); border-color: var(--purple); }
+  .info-box.green { background: var(--green-pale); border-color: var(--green); }
+  .info-box h3 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.05rem; margin-bottom: 8px; }
+  .info-box p { line-height: 1.8; font-size: 0.95rem; }
+  .info-box ul { padding-right: 20px; line-height: 2; font-size: 0.95rem; }
+  .info-box code {
+    background: rgba(0,0,0,0.08);
+    border-radius: 6px;
+    padding: 2px 7px;
+    font-family: monospace;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  /* VOCAB TABLE */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  @media(max-width:600px){ .vocab-grid { grid-template-columns: 1fr; } }
+  .vocab-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .vocab-card .eng { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1rem; color: var(--purple); }
+  .vocab-card .heb { font-size: 0.9rem; color: var(--gray); text-align: left; direction: rtl; }
+  .vocab-card .ara { font-size: 0.8rem; color: #aaa; text-align: left; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--purple);
+    margin: 28px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: var(--border);
+    display: block;
+  }
+
+  /* EXERCISE CARD */
+  .ex-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1.5px solid var(--border);
+    box-shadow: 0 2px 12px rgba(108,63,197,0.06);
+  }
+  .ex-card h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    margin-bottom: 16px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ex-card h3 .badge {
+    background: var(--purple);
+    color: #fff;
+    border-radius: 50px;
+    padding: 2px 12px;
+    font-size: 0.8rem;
+  }
+
+  /* MATCHING */
+  .match-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media(max-width:600px){ .match-container { grid-template-columns: 1fr; } }
+  .match-col { display: flex; flex-direction: column; gap: 8px; }
+  .match-item {
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+    font-size: 0.95rem;
+    user-select: none;
+    text-align: center;
+  }
+  .match-item:hover { border-color: var(--purple-light); background: var(--purple-pale); }
+  .match-item.selected { border-color: var(--purple); background: var(--purple-pale); color: var(--purple); }
+  .match-item.correct { border-color: var(--green); background: var(--green-pale); color: #166534; pointer-events: none; }
+  .match-item.wrong { border-color: var(--red); background: var(--red-pale); color: var(--red); animation: shake 0.4s; }
+  .match-item.disabled { pointer-events: none; opacity: 0.5; }
+
+  /* FILL IN */
+  .fill-item {
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 1rem;
+    line-height: 1.8;
+    direction: ltr;
+    text-align: left;
+  }
+  .fill-item .num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    color: var(--purple);
+    min-width: 24px;
+  }
+  .fill-input {
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 0.95rem;
+    min-width: 120px;
+    transition: all 0.2s;
+    background: #fff;
+    direction: ltr;
+  }
+  .fill-input:focus { outline: none; border-color: var(--purple); background: var(--purple-pale); }
+  .fill-input.correct { border-color: var(--green); background: var(--green-pale); color: #166534; }
+  .fill-input.wrong { border-color: var(--red); background: var(--red-pale); color: var(--red); }
+  .fill-input.locked { pointer-events: none; }
+
+  /* TRANSLATE */
+  .translate-item {
+    margin-bottom: 16px;
+    padding: 14px 16px;
+    background: var(--purple-pale);
+    border-radius: 12px;
+  }
+  .translate-item .source {
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+  .translate-item textarea {
+    width: 100%;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 0.95rem;
+    resize: vertical;
+    min-height: 50px;
+    background: #fff;
+    direction: ltr;
+    text-align: left;
+    transition: all 0.2s;
+  }
+  .translate-item textarea:focus { outline: none; border-color: var(--purple); }
+  .translate-item textarea.correct { border-color: var(--green); background: var(--green-pale); }
+  .translate-item textarea.wrong { border-color: var(--red); background: var(--red-pale); }
+  .feedback-text { font-size: 0.85rem; margin-top: 4px; font-weight: 600; }
+  .feedback-text.ok { color: var(--green); }
+  .feedback-text.err { color: var(--red); }
+
+  /* MCQ */
+  .mcq-item { margin-bottom: 18px; }
+  .mcq-item .q { font-weight: 600; margin-bottom: 10px; font-size: 0.97rem; direction: ltr; text-align: left; }
+  .mcq-options { display: flex; flex-direction: column; gap: 8px; }
+  .mcq-opt {
+    padding: 10px 16px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+    direction: ltr;
+    text-align: left;
+  }
+  .mcq-opt:hover { border-color: var(--blue); background: var(--blue-pale); }
+  .mcq-opt.selected { border-color: var(--blue); background: var(--blue-pale); }
+  .mcq-opt.correct { border-color: var(--green); background: var(--green-pale); color: #166534; pointer-events: none; }
+  .mcq-opt.wrong { border-color: var(--red); background: var(--red-pale); color: var(--red); }
+  .mcq-opt.locked { pointer-events: none; opacity: 0.6; }
+
+  /* VERB BANK */
+  .verb-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 14px;
+    background: var(--blue-pale);
+    border-radius: 12px;
+    border: 1.5px solid #bfdbfe;
+    direction: ltr;
+  }
+  .verb-chip {
+    background: #fff;
+    border: 1.5px solid var(--blue);
+    border-radius: 50px;
+    padding: 5px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--blue);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .verb-chip:hover { background: var(--blue); color: #fff; }
+  .verb-chip.used { opacity: 0.35; pointer-events: none; text-decoration: line-through; }
+
+  /* CHECK BTN */
+  .check-btn {
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .check-btn:hover { background: var(--purple-light); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(108,63,197,0.3); }
+  .check-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* SCORE MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 24px;
+    padding: 36px 40px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    animation: popIn 0.3s ease;
+  }
+  .modal h2 { font-family: 'Nunito', sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--purple); margin-bottom: 10px; }
+  .modal .big-score { font-family: 'Nunito', sans-serif; font-size: 4rem; font-weight: 900; color: var(--purple); line-height: 1; margin: 16px 0; }
+  .modal p { color: var(--gray); font-size: 1rem; line-height: 1.6; margin-bottom: 20px; }
+  .modal-close {
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 28px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .modal-close:hover { background: var(--purple-light); }
+
+  /* ANIMATIONS */
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  @keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .tab-panel.active { animation: fadeIn 0.3s ease; }
+
+  /* GRAMMAR SECTION */
+  .grammar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    direction: ltr;
+    text-align: left;
+  }
+  .grammar-table th {
+    background: var(--purple);
+    color: #fff;
+    padding: 10px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+  }
+  .grammar-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+  .grammar-table tr:nth-child(even) td { background: var(--purple-pale); }
+  .grammar-table .verb-col { font-weight: 700; color: var(--purple); }
+  .grammar-table .past-col { font-weight: 700; color: var(--blue); }
+
+  .formula-box {
+    background: linear-gradient(135deg, #1e1b2e, #3d1f8a);
+    color: #fff;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    direction: ltr;
+    text-align: left;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .formula-box span { color: #c084fc; }
+
+  .timer-bar {
+    background: var(--border);
+    height: 6px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .timer-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--blue));
+    border-radius: 10px;
+    width: 100%;
+    transition: width 1s linear;
+  }
+
+  .attempts-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    background: var(--yellow-pale);
+    color: #92400e;
+    border-radius: 50px;
+    padding: 2px 10px;
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  .word-bank-used { text-decoration: line-through; opacity: 0.4; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>📖 Unit 3 – I Care</h1>
+    <div class="subtitle">אנגלית | כיתה ט | אוצר מילים + עבר פשוט</div>
+  </div>
+  <button class="score-badge" onclick="showScore()">⭐ ציון שלי</button>
+</header>
+
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('intro')" id="tab-intro">
+      <span class="done-mark"></span><span class="tab-icon">🏠</span>כניסה לשיעור
+    </button>
+    <button class="tab-btn" onclick="switchTab('vocab1')" id="tab-vocab1">
+      <span class="done-mark"></span><span class="tab-icon">📚</span>אוצר מילים – התאמה
+    </button>
+    <button class="tab-btn" onclick="switchTab('vocab2')" id="tab-vocab2">
+      <span class="done-mark"></span><span class="tab-icon">✍️</span>השלמת משפטים
+    </button>
+    <button class="tab-btn" onclick="switchTab('vocab3')" id="tab-vocab3">
+      <span class="done-mark"></span><span class="tab-icon">🌍</span>תרגום
+    </button>
+    <button class="tab-btn" onclick="switchTab('vocab4')" id="tab-vocab4">
+      <span class="done-mark"></span><span class="tab-icon">🔵</span>שאלות אמריקאיות
+    </button>
+    <button class="tab-btn" onclick="switchTab('grammar')" id="tab-grammar">
+      <span class="done-mark"></span><span class="tab-icon">⚡</span>עבר פשוט
+    </button>
+    <button class="tab-btn" onclick="switchTab('verbs')" id="tab-verbs">
+      <span class="done-mark"></span><span class="tab-icon">🔧</span>פעלים בעבר
+    </button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ========== TAB: INTRO ========== -->
+<div class="tab-panel active" id="panel-intro">
+  <div class="intro-card">
+    <h2>👋 שלום! ברוכים הבאים לשיעור</h2>
+    <p>היום נלמד אוצר מילים חדש לקראת סיפור מרתק, ונחזור על <strong>עבר פשוט (Past Simple)</strong> בצורה קלה וברורה.<br>
+    השיעור מחולק לחלקים – עברו לפי הסדר ועשו כל תרגיל. בהצלחה! 💪</p>
+  </div>
+
+  <div class="info-box purple">
+    <h3>📋 מה נלמד היום?</h3>
+    <ul>
+      <li>מילים חדשות שיופיעו בסיפור</li>
+      <li>תרגולי אוצר מילים: התאמה, השלמה, תרגום ושאלות</li>
+      <li>עבר פשוט – הסבר קצר ופשוט</li>
+      <li>תרגול פעלים לא רגילים שיופיעו בסיפור</li>
+    </ul>
+  </div>
+
+  <div class="info-box blue">
+    <h3>💡 איך זה עובד?</h3>
+    <p>• יש לכם <strong>2 נסיונות לכל תשובה</strong>. אחרי 2 נסיונות, התשובה תיעצר.<br>
+    • שגיאות כתיב קטנות – לא נענש! אנחנו מבינים.<br>
+    • העמוד שומר את התשובות שלכם אפילו אם תצאו ותחזרו.<br>
+    • לחצו על <strong>⭐ ציון שלי</strong> למעלה בכל שלב.</p>
+  </div>
+
+  <div class="section-title">📖 אוצר המילים של היחידה</div>
+
+  <div class="info-box green">
+    <h3>🆕 מילים חדשות (New Vocabulary)</h3>
+  </div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><span class="eng">(to) arrive</span><div><div class="heb">להגיע</div><div class="ara">يَصِل، يَجيء</div></div></div>
+    <div class="vocab-card"><span class="eng">salt</span><div><div class="heb">מֶלַח</div><div class="ara">ملح</div></div></div>
+    <div class="vocab-card"><span class="eng">(to) continue</span><div><div class="heb">להמשיך</div><div class="ara">يُواصِل، يَستمر</div></div></div>
+    <div class="vocab-card"><span class="eng">(a) secret</span><div><div class="heb">סוד</div><div class="ara">سِرّ</div></div></div>
+    <div class="vocab-card"><span class="eng">crazy</span><div><div class="heb">מְטוֹרָף</div><div class="ara">مجنون</div></div></div>
+    <div class="vocab-card"><span class="eng">special</span><div><div class="heb">מְיוּחָד</div><div class="ara">خاص، مميز</div></div></div>
+    <div class="vocab-card"><span class="eng">everywhere</span><div><div class="heb">בְּכָל מָקוֹם</div><div class="ara">في كل مكان</div></div></div>
+    <div class="vocab-card"><span class="eng">tasty</span><div><div class="heb">טָעִים</div><div class="ara">لذيذ الطعم</div></div></div>
+    <div class="vocab-card"><span class="eng">excited</span><div><div class="heb">נֶרְגָּשׁ</div><div class="ara">متحمس، مُستثار</div></div></div>
+    <div class="vocab-card"><span class="eng">vegetables</span><div><div class="heb">יְרָקוֹת</div><div class="ara">خضراوات</div></div></div>
+    <div class="vocab-card"><span class="eng">finally</span><div><div class="heb">לְבַסּוֹף</div><div class="ara">في النهاية</div></div></div>
+    <div class="vocab-card"><span class="eng">(a) village</span><div><div class="heb">כְּפָר</div><div class="ara">قرية</div></div></div>
+    <div class="vocab-card"><span class="eng">(to) pick up</span><div><div class="heb">לְהָרִים</div><div class="ara">يلتقط</div></div></div>
+    <div class="vocab-card"><span class="eng">(a) voice</span><div><div class="heb">קוֹל</div><div class="ara">صوت</div></div></div>
+  </div>
+
+  <div class="info-box green">
+    <h3>✅ מילים שכנראה כבר יודעים (Vocabulary You Probably Know)</h3>
+  </div>
+  <div class="vocab-grid">
+    <div class="vocab-card"><span class="eng">(a) carrot</span><div><div class="heb">גֶּזֶר</div><div class="ara">جزر</div></div></div>
+    <div class="vocab-card"><span class="eng">meat</span><div><div class="heb">בָּשָׂר</div><div class="ara">لحم</div></div></div>
+    <div class="vocab-card"><span class="eng">(to) cook</span><div><div class="heb">לְבַשֵּׁל</div><div class="ara">يطبخ</div></div></div>
+    <div class="vocab-card"><span class="eng">(an) onion</span><div><div class="heb">בָּצָל</div><div class="ara">بصل</div></div></div>
+    <div class="vocab-card"><span class="eng">fire</span><div><div class="heb">אֵשׁ</div><div class="ara">نار</div></div></div>
+    <div class="vocab-card"><span class="eng">(a) pepper</span><div><div class="heb">פִּלְפֵּל</div><div class="ara">فلفل أخضر</div></div></div>
+    <div class="vocab-card"><span class="eng">friendly</span><div><div class="heb">יְדִידוּתִי</div><div class="ara">ودّي، مسالم</div></div></div>
+    <div class="vocab-card"><span class="eng">poor</span><div><div class="heb">עָנִי / מִסְכֵּן</div><div class="ara">فقير / مسكين</div></div></div>
+    <div class="vocab-card"><span class="eng">hungry</span><div><div class="heb">רָעֵב</div><div class="ara">جائع</div></div></div>
+    <div class="vocab-card"><span class="eng">soup</span><div><div class="heb">מָרָק</div><div class="ara">حساء، شوربة</div></div></div>
+    <div class="vocab-card"><span class="eng">(an) idea</span><div><div class="heb">רַעְיוֹן</div><div class="ara">فكرة</div></div></div>
+    <div class="vocab-card"><span class="eng">(a) stone</span><div><div class="heb">אֶבֶן</div><div class="ara">حجر</div></div></div>
+    <div class="vocab-card"><span class="eng">(a) marketplace</span><div><div class="heb">כִּיכַּר הַשּׁוּק</div><div class="ara">ساحة السوق</div></div></div>
+    <div class="vocab-card"><span class="eng">(a) way</span><div><div class="heb">דֶּרֶךְ</div><div class="ara">طريقة</div></div></div>
+  </div>
+
+  <button class="check-btn" onclick="switchTab('vocab1')">התחל תרגולים ←</button>
+</div>
+
+<!-- ========== TAB: VOCAB1 - MATCHING ========== -->
+<div class="tab-panel" id="panel-vocab1">
+  <div class="ex-card">
+    <h3><span class="badge">תרגיל א</span> 🔗 התאמה: חברו כל מילה להגדרה שלה</h3>
+    <p style="color:var(--gray);font-size:0.9rem;margin-bottom:16px;">לחצו על מילה באנגלית, ואחר כך על התרגום המתאים בעברית.</p>
+    <div class="match-container">
+      <div class="match-col" id="match-left-A"></div>
+      <div class="match-col" id="match-right-A"></div>
+    </div>
+    <div id="match-feedback-A" style="margin-top:12px;font-weight:700;"></div>
+  </div>
+
+  <div class="ex-card">
+    <h3><span class="badge">תרגיל ב</span> 🔗 התאמה: סט שני</h3>
+    <div class="match-container">
+      <div class="match-col" id="match-left-B"></div>
+      <div class="match-col" id="match-right-B"></div>
+    </div>
+    <div id="match-feedback-B" style="margin-top:12px;font-weight:700;"></div>
+  </div>
+</div>
+
+<!-- ========== TAB: VOCAB2 - FILL ========== -->
+<div class="tab-panel" id="panel-vocab2">
+  <div class="ex-card">
+    <h3><span class="badge">תרגיל ג</span> ✍️ השלימו את המשפטים עם המילה הנכונה</h3>
+    <div class="verb-bank" id="fill-bank"></div>
+    <div id="fill-sentences"></div>
+    <button class="check-btn" onclick="checkFill()">✔ בדוק תשובות</button>
+  </div>
+</div>
+
+<!-- ========== TAB: VOCAB3 - TRANSLATE ========== -->
+<div class="tab-panel" id="panel-vocab3">
+  <div class="ex-card">
+    <h3><span class="badge">תרגיל ד</span> 🌍 תרגמו לאנגלית</h3>
+    <p style="color:var(--gray);font-size:0.9rem;margin-bottom:16px;">כתבו את התרגום האנגלי של כל משפט. <span class="attempts-tag">2 נסיונות</span></p>
+    <div id="translate-en"></div>
+    <button class="check-btn" onclick="checkTranslateEn()">✔ בדוק תשובות</button>
+  </div>
+  <div class="ex-card">
+    <h3><span class="badge">תרגיל ה</span> 🌍 תרגמו לעברית</h3>
+    <div id="translate-he"></div>
+    <button class="check-btn" onclick="checkTranslateHe()">✔ בדוק תשובות</button>
+  </div>
+</div>
+
+<!-- ========== TAB: VOCAB4 - MCQ ========== -->
+<div class="tab-panel" id="panel-vocab4">
+  <div class="ex-card">
+    <h3><span class="badge">תרגיל ו</span> 🔵 שאלות אמריקאיות – בחרו את התשובה הנכונה</h3>
+    <div id="mcq-container"></div>
+  </div>
+</div>
+
+<!-- ========== TAB: GRAMMAR ========== -->
+<div class="tab-panel" id="panel-grammar">
+  <div class="intro-card">
+    <h2>⚡ עבר פשוט – Past Simple</h2>
+    <p>משתמשים בזמן עבר פשוט כשמשהו <strong>קרה בעבר וגמר</strong>. זה הזמן שנשתמש בו בסיפור שנקרא.</p>
+  </div>
+
+  <div class="info-box purple">
+    <h3>📌 הכלל הפשוט:</h3>
+    <p>לרוב הפעלים פשוט מוסיפים <code>-ed</code> בסוף:</p>
+    <ul style="direction:ltr;text-align:left;">
+      <li>cook → cook<strong>ed</strong></li>
+      <li>arrive → arriv<strong>ed</strong></li>
+      <li>continue → continu<strong>ed</strong></li>
+    </ul>
+  </div>
+
+  <div class="formula-box">
+    Subject + <span>verb + ed</span> &nbsp;/&nbsp; Subject + <span>irregular verb</span>
+  </div>
+
+  <div class="info-box blue">
+    <h3>⚠️ פעלים לא רגילים – אלה לא מקבלים -ed!</h3>
+    <p>חלק מהפעלים משנים צורה לגמרי. אלה הפעלים שיופיעו בסיפור:</p>
+  </div>
+
+  <table class="grammar-table">
+    <thead><tr><th>#</th><th>Present (הווה)</th><th>Past (עבר)</th><th>עברית</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="verb-col">are</td><td class="past-col">were</td><td>הם/הן היו</td></tr>
+      <tr><td>2</td><td class="verb-col">is / am</td><td class="past-col">was</td><td>היה / הייתה</td></tr>
+      <tr><td>3</td><td class="verb-col">say</td><td class="past-col">said</td><td>אמר</td></tr>
+      <tr><td>4</td><td class="verb-col">go</td><td class="past-col">went</td><td>הלך</td></tr>
+      <tr><td>5</td><td class="verb-col">find</td><td class="past-col">found</td><td>מצא</td></tr>
+      <tr><td>6</td><td class="verb-col">get</td><td class="past-col">got</td><td>קיבל / הגיע</td></tr>
+      <tr><td>7</td><td class="verb-col">have</td><td class="past-col">had</td><td>היה לו</td></tr>
+      <tr><td>8</td><td class="verb-col">give</td><td class="past-col">gave</td><td>נתן</td></tr>
+      <tr><td>9</td><td class="verb-col">know</td><td class="past-col">knew</td><td>ידע</td></tr>
+      <tr><td>10</td><td class="verb-col">bring</td><td class="past-col">brought</td><td>הביא</td></tr>
+      <tr><td>11</td><td class="verb-col">put</td><td class="past-col">put</td><td>שם (לא משתנה!)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box green">
+    <h3>💡 דוגמאות מהסיפור:</h3>
+    <ul style="direction:ltr;text-align:left;">
+      <li>The soldiers <strong>were</strong> hungry. (היו רעבים)</li>
+      <li>She <strong>gave</strong> them vegetables. (נתנה להם ירקות)</li>
+      <li>He <strong>found</strong> a stone. (מצא אבן)</li>
+      <li>They <strong>went</strong> to the village. (הלכו לכפר)</li>
+    </ul>
+  </div>
+
+  <button class="check-btn" onclick="switchTab('verbs')">עכשיו נתרגל ← </button>
+</div>
+
+<!-- ========== TAB: VERBS ========== -->
+<div class="tab-panel" id="panel-verbs">
+  <div class="ex-card">
+    <h3><span class="badge">תרגיל ז</span> 🔧 כתבו את צורת העבר</h3>
+    <p style="color:var(--gray);font-size:0.9rem;margin-bottom:12px;">השתמשו במחסן הפעלים למטה. <span class="attempts-tag">2 נסיונות</span></p>
+    <div class="verb-bank" id="verbbank-chips"></div>
+    <div id="verb-exercise"></div>
+    <button class="check-btn" onclick="checkVerbs()">✔ בדוק תשובות</button>
+  </div>
+
+  <div class="ex-card">
+    <h3><span class="badge">תרגיל ח</span> 🌟 תרגמו לאנגלית – השתמשו בעבר</h3>
+    <p style="color:var(--gray);font-size:0.9rem;margin-bottom:12px;">תרגמו את המשפטים לאנגלית. השתמשו בזמן עבר.</p>
+    <div id="verb-translate"></div>
+    <button class="check-btn" onclick="checkVerbTranslate()">✔ בדוק תשובות</button>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<!-- SCORE MODAL -->
+<div class="modal-overlay" id="score-modal">
+  <div class="modal">
+    <h2>⭐ הציון שלך</h2>
+    <div class="big-score" id="modal-score">0</div>
+    <p id="modal-msg"></p>
+    <button class="modal-close" onclick="closeScore()">סגור</button>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const matchSetA = [
+  { eng: 'salt', heb: 'מֶלַח' },
+  { eng: 'crazy', heb: 'מְטוֹרָף' },
+  { eng: 'excited', heb: 'נֶרְגָּשׁ' },
+  { eng: 'everywhere', heb: 'בְּכָל מָקוֹם' },
+  { eng: 'finally', heb: 'לְבַסּוֹף' },
+  { eng: 'secret', heb: 'סוֹד' },
+];
+const matchSetB = [
+  { eng: 'village', heb: 'כְּפָר' },
+  { eng: 'voice', heb: 'קוֹל' },
+  { eng: 'tasty', heb: 'טָעִים' },
+  { eng: 'special', heb: 'מְיוּחָד' },
+  { eng: 'vegetables', heb: 'יְרָקוֹת' },
+  { eng: 'pick up', heb: 'לְהָרִים' },
+];
+
+const fillWords = ['excited','everywhere','arrived','hungry','friendly','village','secret','continue','tasty','fire'];
+const fillSentences = [
+  { text: 'The soldiers were very ___. They needed food.', answer: 'hungry', hint: 'רָעֵב' },
+  { text: 'The soup smelled ___. Everyone wanted to eat it.', answer: 'tasty', hint: 'טָעִים' },
+  { text: 'When the soldiers ___ at the village, it was quiet.', answer: 'arrived', hint: 'הגיעו' },
+  { text: 'The villagers were ___ – they smiled and said hello.', answer: 'friendly', hint: 'יְדִידוּתִיים' },
+  { text: 'The soldier had a ___. He didn\'t tell anyone his plan.', answer: 'secret', hint: 'סוֹד' },
+  { text: 'Soup shops were ___ – in every street!', answer: 'everywhere', hint: 'בְּכָל מָקוֹם' },
+  { text: 'The children were ___ to see the fire.', answer: 'excited', hint: 'נְרְגָּשִׁים' },
+  { text: 'They put the pot on the ___.', answer: 'fire', hint: 'אֵשׁ' },
+  { text: 'The small ___ was poor, but the people were kind.', answer: 'village', hint: 'כְּפָר' },
+  { text: 'Please ___ cooking – the soup is not ready yet!', answer: 'continue', hint: 'הַמְשִׁיכוּ' },
+];
+
+const translateEnSentences = [
+  { heb: 'הלכתי הביתה.', ara: 'ذهبتُ إلى البيت.', answer: 'I went home', accept: ['i went home'] },
+  { heb: 'הוא מצא את הספר.', ara: 'هو وجد الكتاب.', answer: 'He found the book', accept: ['he found the book'] },
+  { heb: 'היא נתנה לי עוגה.', ara: 'هي أعطتني كعكة.', answer: 'She gave me a cake', accept: ['she gave me a cake','she gave me cake'] },
+  { heb: 'ידעתי את התשובה.', ara: 'عرفتُ الجواب.', answer: 'I knew the answer', accept: ['i knew the answer'] },
+];
+const translateHeSentences = [
+  { eng: 'The soldiers were hungry.', answer: 'החיילים היו רעבים', accept: ['חיילים היו רעבים','החיילים היו רעבים','הם היו רעבים'] },
+  { eng: 'She brought vegetables to the soup.', answer: 'היא הביאה ירקות למרק', accept: ['היא הביאה ירקות','הביאה ירקות למרק'] },
+  { eng: 'He had an idea.', answer: 'הייתה לו רעיון', accept: ['היה לו רעיון','הייתה לו רעיון','הוא הייתה לו','לו הייתה רעיון'] },
+  { eng: 'They got a big stone.', answer: 'הם קיבלו אבן גדולה', accept: ['קיבלו אבן גדולה','קיבלו אבן'] },
+];
+
+const mcqData = [
+  { q: 'Which word means "לְבַסּוֹף"?', opts: ['everywhere','finally','excited','friendly'], ans: 'finally' },
+  { q: 'The soup is ___. It tastes great!', opts: ['crazy','hungry','tasty','poor'], ans: 'tasty' },
+  { q: 'Which word means "קוֹל"?', opts: ['village','voice','stone','way'], ans: 'voice' },
+  { q: 'She has a ___. She doesn\'t tell anyone.', opts: ['fire','secret','marketplace','carrot'], ans: 'secret' },
+  { q: 'There were soup shops ___ in the city.', opts: ['finally','friendly','everywhere','excited'], ans: 'everywhere' },
+  { q: 'Which word means "כְּפָר"?', opts: ['idea','village','stone','onion'], ans: 'village' },
+  { q: 'The children were ___ to see the magic show.', opts: ['hungry','poor','excited','crazy'], ans: 'excited' },
+  { q: '"מֶלַח" in English is:', opts: ['pepper','onion','salt','meat'], ans: 'salt' },
+];
+
+const verbExercise = [
+  { present: 'are', past: 'were', heb: 'היו' },
+  { present: 'is', past: 'was', heb: 'היה/הייתה' },
+  { present: 'say', past: 'said', heb: 'אמר' },
+  { present: 'go', past: 'went', heb: 'הלך' },
+  { present: 'find', past: 'found', heb: 'מצא' },
+  { present: 'get', past: 'got', heb: 'קיבל' },
+  { present: 'have', past: 'had', heb: 'היה לו' },
+  { present: 'give', past: 'gave', heb: 'נתן' },
+  { present: 'know', past: 'knew', heb: 'ידע' },
+  { present: 'bring', past: 'brought', heb: 'הביא' },
+];
+const verbBank = ['were','was','said','went','found','got','had','gave','knew','brought'];
+
+const verbTranslateSentences = [
+  { heb: 'הם היו רעבים מאוד.', answer: 'they were very hungry', accept: ['they were very hungry','they were hungry'] },
+  { heb: 'היא נתנה להם מרק.', answer: 'she gave them soup', accept: ['she gave them soup'] },
+  { heb: 'הוא מצא אבן.', answer: 'he found a stone', accept: ['he found a stone'] },
+  { heb: 'הם הלכו לכפר.', answer: 'they went to the village', accept: ['they went to the village','they went to a village'] },
+];
+
+// ============================================================
+// STATE
+// ============================================================
+const STATE_KEY = 'unit3_lesson_v2';
+let state = {};
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STATE_KEY);
+    if (saved) state = JSON.parse(saved);
+  } catch(e) { state = {}; }
+}
+function saveState() {
+  try { localStorage.setItem(STATE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+function getS(key, def) { return state[key] !== undefined ? state[key] : def; }
+function setS(key, val) { state[key] = val; saveState(); }
+
+// ============================================================
+// SCORE
+// ============================================================
+let totalPoints = 0;
+let maxPoints = 0;
+
+function updateScore(pts, max) {
+  totalPoints += pts;
+  maxPoints += max;
+}
+function calcScore() {
+  // Count from state
+  let pts = 0, max = 0;
+  // match A
+  matchSetA.forEach(m => {
+    max++;
+    if (getS('matchA_' + m.eng, false)) pts++;
+  });
+  matchSetB.forEach(m => {
+    max++;
+    if (getS('matchB_' + m.eng, false)) pts++;
+  });
+  // fill
+  fillSentences.forEach((s, i) => {
+    max++;
+    if (getS('fill_' + i, '') === 'correct') pts++;
+  });
+  // translate en
+  translateEnSentences.forEach((s, i) => {
+    max++;
+    if (getS('tranen_' + i, '') === 'correct') pts++;
+  });
+  translateHeSentences.forEach((s, i) => {
+    max++;
+    if (getS('tranhe_' + i, '') === 'correct') pts++;
+  });
+  // mcq
+  mcqData.forEach((q, i) => {
+    max++;
+    if (getS('mcq_' + i, '') === 'correct') pts++;
+  });
+  // verbs
+  verbExercise.forEach((v, i) => {
+    max++;
+    if (getS('verb_' + i, '') === 'correct') pts++;
+  });
+  // verb translate
+  verbTranslateSentences.forEach((s, i) => {
+    max++;
+    if (getS('verbtran_' + i, '') === 'correct') pts++;
+  });
+  return { pts, max, pct: max > 0 ? Math.round(pts / max * 100) : 0 };
+}
+function showScore() {
+  const { pts, max, pct } = calcScore();
+  document.getElementById('modal-score').textContent = pct + '%';
+  let msg = '';
+  if (pct >= 90) msg = '🌟 מצוין! כל הכבוד!';
+  else if (pct >= 70) msg = '👍 יפה מאוד! המשיכו כך!';
+  else if (pct >= 50) msg = '💪 ממשיכים לנסות – אתם יכולים!';
+  else msg = '📖 תחזרו על המילים ונסו שוב!';
+  document.getElementById('modal-msg').textContent = `השגתם ${pts} מתוך ${max} נקודות. ${msg}`;
+  document.getElementById('score-modal').classList.add('show');
+}
+function closeScore() {
+  document.getElementById('score-modal').classList.remove('show');
+}
+
+// ============================================================
+// TABS
+// ============================================================
+function switchTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+
+// ============================================================
+// FUZZY MATCH
+// ============================================================
+function normalize(s) {
+  return s.toLowerCase().trim()
+    .replace(/[.!?,;:'"]/g, '')
+    .replace(/\s+/g, ' ')
+    .replace(/^(a|an|the) /, '');
+}
+function fuzzyMatch(input, correct, accepts) {
+  const ni = normalize(input);
+  const nc = normalize(correct);
+  if (ni === nc) return true;
+  if (accepts && accepts.some(a => normalize(a) === ni)) return true;
+  // Allow 1 typo per 5 chars
+  if (levenshtein(ni, nc) <= Math.floor(nc.length / 6)) return true;
+  return false;
+}
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  const dp = Array.from({length: m+1}, (_,i) => Array.from({length: n+1}, (_,j) => j === 0 ? i : 0));
+  for (let j = 0; j <= n; j++) dp[0][j] = j;
+  for (let i = 1; i <= m; i++)
+    for (let j = 1; j <= n; j++)
+      dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+  return dp[m][n];
+}
+
+// ============================================================
+// MATCHING
+// ============================================================
+let matchSelectedLeft = { A: null, B: null };
+let matchSelectedRight = { A: null, B: null };
+let matchAttempts = {};
+
+function buildMatch(set, prefix, leftId, rightId, feedbackId) {
+  const leftEl = document.getElementById(leftId);
+  const rightEl = document.getElementById(rightId);
+  const shuffledRight = [...set].map(m => m.heb).sort(() => Math.random() - 0.5);
+
+  set.forEach(m => {
+    const el = document.createElement('div');
+    el.className = 'match-item';
+    el.textContent = m.eng;
+    el.dataset.key = m.eng;
+    if (getS(prefix + m.eng, false)) { el.classList.add('correct'); }
+    else el.addEventListener('click', () => selectMatchLeft(el, prefix, set, feedbackId));
+    leftEl.appendChild(el);
+  });
+
+  shuffledRight.forEach(heb => {
+    const m = set.find(x => x.heb === heb);
+    const el = document.createElement('div');
+    el.className = 'match-item';
+    el.textContent = heb;
+    el.dataset.key = m.eng;
+    el.style.direction = 'rtl';
+    if (getS(prefix + m.eng, false)) { el.classList.add('correct'); }
+    else el.addEventListener('click', () => selectMatchRight(el, prefix, set, feedbackId));
+    rightEl.appendChild(el);
+  });
+}
+
+function selectMatchLeft(el, prefix, set, feedbackId) {
+  const p = prefix === 'matchA_' ? 'A' : 'B';
+  document.querySelectorAll(`#match-left-${p.slice(-1)==='A'?'A':'B'} .match-item.selected`).forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  matchSelectedLeft[p] = el;
+  if (matchSelectedRight[p]) checkMatchPair(prefix, p, set, feedbackId);
+}
+function selectMatchRight(el, prefix, set, feedbackId) {
+  const p = prefix === 'matchA_' ? 'A' : 'B';
+  document.querySelectorAll(`#match-right-${p} .match-item.selected`).forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  matchSelectedRight[p] = el;
+  if (matchSelectedLeft[p]) checkMatchPair(prefix, p, set, feedbackId);
+}
+
+// Better: fix IDs
+function selectMatchLeftFix(el, prefix, side, set, feedbackId) {
+  document.querySelectorAll(`#match-left-${side} .match-item.selected`).forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  matchSelectedLeft[side] = el;
+  if (matchSelectedRight[side]) checkMatchPair(prefix, side, set, feedbackId);
+}
+function selectMatchRightFix(el, prefix, side, set, feedbackId) {
+  document.querySelectorAll(`#match-right-${side} .match-item.selected`).forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  matchSelectedRight[side] = el;
+  if (matchSelectedLeft[side]) checkMatchPair(prefix, side, set, feedbackId);
+}
+
+function checkMatchPair(prefix, side, set, feedbackId) {
+  const leftEl = matchSelectedLeft[side];
+  const rightEl = matchSelectedRight[side];
+  if (!leftEl || !rightEl) return;
+  const engKey = leftEl.dataset.key;
+  const rightKey = rightEl.dataset.key;
+  const correct = engKey === rightKey;
+  const attKey = prefix + engKey + '_att';
+  let att = getS(attKey, 0);
+
+  if (correct) {
+    leftEl.classList.remove('selected'); leftEl.classList.add('correct');
+    rightEl.classList.remove('selected'); rightEl.classList.add('correct');
+    leftEl.removeEventListener('click', leftEl._handler);
+    rightEl.removeEventListener('click', rightEl._handler);
+    setS(prefix + engKey, true);
+    document.getElementById(feedbackId).innerHTML = '<span style="color:var(--green)">✅ נכון!</span>';
+  } else {
+    att++;
+    setS(attKey, att);
+    leftEl.classList.remove('selected');
+    rightEl.classList.add('wrong');
+    setTimeout(() => rightEl.classList.remove('wrong'), 600);
+    if (att >= 2) {
+      // reveal correct
+      const correctHeb = set.find(m => m.eng === engKey)?.heb;
+      document.getElementById(feedbackId).innerHTML = `<span style="color:var(--red)">❌ התשובה הנכונה: <strong>${correctHeb}</strong></span>`;
+      leftEl.classList.add('disabled');
+      // find correct right
+      document.querySelectorAll(`#match-right-${side} .match-item`).forEach(e => {
+        if (e.dataset.key === engKey) { e.classList.add('correct'); e.style.pointerEvents='none'; }
+      });
+      leftEl.style.pointerEvents = 'none';
+      setS(prefix + engKey, true);
+    } else {
+      document.getElementById(feedbackId).innerHTML = `<span style="color:var(--yellow)">⚠️ לא נכון – נסו שוב (נסיון ${att}/2)</span>`;
+    }
+  }
+  matchSelectedLeft[side] = null;
+  matchSelectedRight[side] = null;
+}
+
+function initMatch() {
+  // Set A
+  const setA = matchSetA;
+  const leftA = document.getElementById('match-left-A');
+  const rightA = document.getElementById('match-right-A');
+  const shuffledA = [...setA].map(m => m.heb).sort(() => Math.random() - 0.5);
+  setA.forEach(m => {
+    const el = document.createElement('div');
+    el.className = 'match-item'; el.textContent = m.eng; el.dataset.key = m.eng;
+    if (getS('matchA_' + m.eng, false)) { el.classList.add('correct'); }
+    else {
+      el._handler = () => selectMatchLeftFix(el, 'matchA_', 'A', setA, 'match-feedback-A');
+      el.addEventListener('click', el._handler);
+    }
+    leftA.appendChild(el);
+  });
+  shuffledA.forEach(heb => {
+    const m = setA.find(x => x.heb === heb);
+    const el = document.createElement('div');
+    el.className = 'match-item'; el.textContent = heb; el.dataset.key = m.eng; el.style.direction='rtl';
+    if (getS('matchA_' + m.eng, false)) { el.classList.add('correct'); }
+    else {
+      el._handler = () => selectMatchRightFix(el, 'matchA_', 'A', setA, 'match-feedback-A');
+      el.addEventListener('click', el._handler);
+    }
+    rightA.appendChild(el);
+  });
+
+  // Set B
+  const setB = matchSetB;
+  const leftB = document.getElementById('match-left-B');
+  const rightB = document.getElementById('match-right-B');
+  const shuffledB = [...setB].map(m => m.heb).sort(() => Math.random() - 0.5);
+  setB.forEach(m => {
+    const el = document.createElement('div');
+    el.className = 'match-item'; el.textContent = m.eng; el.dataset.key = m.eng;
+    if (getS('matchB_' + m.eng, false)) { el.classList.add('correct'); }
+    else {
+      el._handler = () => selectMatchLeftFix(el, 'matchB_', 'B', setB, 'match-feedback-B');
+      el.addEventListener('click', el._handler);
+    }
+    leftB.appendChild(el);
+  });
+  shuffledB.forEach(heb => {
+    const m = setB.find(x => x.heb === heb);
+    const el = document.createElement('div');
+    el.className = 'match-item'; el.textContent = heb; el.dataset.key = m.eng; el.style.direction='rtl';
+    if (getS('matchB_' + m.eng, false)) { el.classList.add('correct'); }
+    else {
+      el._handler = () => selectMatchRightFix(el, 'matchB_', 'B', setB, 'match-feedback-B');
+      el.addEventListener('click', el._handler);
+    }
+    rightB.appendChild(el);
+  });
+}
+
+// ============================================================
+// FILL IN
+// ============================================================
+function initFill() {
+  const bankEl = document.getElementById('fill-bank');
+  const sentEl = document.getElementById('fill-sentences');
+  bankEl.innerHTML = '';
+  sentEl.innerHTML = '';
+  fillWords.forEach(w => {
+    const chip = document.createElement('span');
+    chip.className = 'verb-chip';
+    chip.textContent = w;
+    chip.dataset.word = w;
+    chip.id = 'fill-chip-' + w;
+    bankEl.appendChild(chip);
+  });
+  fillSentences.forEach((s, i) => {
+    const parts = s.text.split('___');
+    const div = document.createElement('div');
+    div.className = 'fill-item';
+    const status = getS('fill_' + i, '');
+    const savedVal = getS('fill_val_' + i, '');
+    div.innerHTML = `<span class="num">${i+1}.</span>`;
+    const before = document.createElement('span');
+    before.textContent = parts[0];
+    before.style.direction = 'ltr';
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'fill-input';
+    inp.placeholder = '...';
+    inp.dataset.idx = i;
+    inp.value = savedVal;
+    if (status === 'correct') { inp.classList.add('correct'); inp.disabled = true; }
+    else if (status === 'locked') { inp.classList.add('wrong'); inp.disabled = true; }
+    inp.addEventListener('input', () => { setS('fill_val_' + i, inp.value); });
+    const after = document.createElement('span');
+    after.textContent = parts[1] || '';
+    after.style.direction = 'ltr';
+    const hint = document.createElement('span');
+    hint.style.cssText = 'color:var(--gray);font-size:0.82rem;';
+    hint.textContent = `(${s.hint})`;
+    div.appendChild(before);
+    div.appendChild(inp);
+    div.appendChild(after);
+    div.appendChild(hint);
+    sentEl.appendChild(div);
+  });
+  // grey out used
+  fillSentences.forEach((s, i) => {
+    const status = getS('fill_' + i, '');
+    if (status === 'correct' || status === 'locked') {
+      const val = getS('fill_val_' + i, '');
+      const chip = document.getElementById('fill-chip-' + val.toLowerCase());
+      if (chip) chip.classList.add('used');
+    }
+  });
+}
+
+function checkFill() {
+  fillSentences.forEach((s, i) => {
+    const inp = document.querySelector(`.fill-input[data-idx="${i}"]`);
+    if (!inp || inp.disabled) return;
+    const status = getS('fill_' + i, '');
+    const attKey = 'fill_att_' + i;
+    const att = getS(attKey, 0);
+    if (status === 'correct' || status === 'locked') return;
+    const correct = fuzzyMatch(inp.value, s.answer, null);
+    if (correct) {
+      inp.classList.add('correct'); inp.disabled = true;
+      setS('fill_' + i, 'correct');
+      setS('fill_val_' + i, inp.value);
+      const chip = document.getElementById('fill-chip-' + s.answer.toLowerCase());
+      if (chip) chip.classList.add('used');
+    } else {
+      const newAtt = att + 1;
+      setS(attKey, newAtt);
+      inp.classList.add('wrong');
+      setTimeout(() => inp.classList.remove('wrong'), 600);
+      if (newAtt >= 2) {
+        inp.value = s.answer; inp.classList.add('wrong'); inp.disabled = true;
+        setS('fill_' + i, 'locked');
+        setS('fill_val_' + i, s.answer);
+      }
+    }
+  });
+}
+
+// ============================================================
+// TRANSLATE
+// ============================================================
+function initTranslateEn() {
+  const el = document.getElementById('translate-en');
+  el.innerHTML = '';
+  translateEnSentences.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'translate-item';
+    const status = getS('tranen_' + i, '');
+    const savedVal = getS('tranen_val_' + i, '');
+    div.innerHTML = `
+      <div class="source" style="direction:rtl">${s.heb} <span style="color:var(--gray);font-size:0.85rem;font-weight:400;">${s.ara}</span></div>
+      <textarea data-idx="${i}" placeholder="Write in English..." ${status==='correct'||status==='locked'?'disabled':''}>${savedVal}</textarea>
+      <div class="feedback-text" id="tranen-fb-${i}"></div>`;
+    el.appendChild(div);
+    const ta = div.querySelector('textarea');
+    if (status === 'correct') { ta.classList.add('correct'); }
+    else if (status === 'locked') { ta.classList.add('wrong'); ta.value = s.answer; }
+    ta.addEventListener('input', () => setS('tranen_val_' + i, ta.value));
+  });
+}
+function checkTranslateEn() {
+  translateEnSentences.forEach((s, i) => {
+    const ta = document.querySelector(`#translate-en textarea[data-idx="${i}"]`);
+    if (!ta || ta.disabled) return;
+    const status = getS('tranen_' + i, '');
+    if (status === 'correct' || status === 'locked') return;
+    const att = getS('tranen_att_' + i, 0);
+    const ok = fuzzyMatch(ta.value, s.answer, s.accept);
+    const fb = document.getElementById('tranen-fb-' + i);
+    if (ok) {
+      ta.classList.add('correct'); ta.disabled = true;
+      setS('tranen_' + i, 'correct');
+      if (fb) { fb.textContent = '✅ נכון!'; fb.className = 'feedback-text ok'; }
+    } else {
+      const newAtt = att + 1;
+      setS('tranen_att_' + i, newAtt);
+      if (newAtt >= 2) {
+        ta.value = s.answer; ta.classList.add('wrong'); ta.disabled = true;
+        setS('tranen_' + i, 'locked');
+        if (fb) { fb.textContent = `❌ תשובה: ${s.answer}`; fb.className = 'feedback-text err'; }
+      } else {
+        ta.classList.add('wrong');
+        setTimeout(() => ta.classList.remove('wrong'), 600);
+        if (fb) { fb.textContent = `⚠️ נסיון ${newAtt}/2 – נסו שוב`; fb.className = 'feedback-text err'; }
+      }
+    }
+  });
+}
+function initTranslateHe() {
+  const el = document.getElementById('translate-he');
+  el.innerHTML = '';
+  translateHeSentences.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'translate-item';
+    const status = getS('tranhe_' + i, '');
+    const savedVal = getS('tranhe_val_' + i, '');
+    div.innerHTML = `
+      <div class="source" style="direction:ltr">${s.eng}</div>
+      <textarea data-idx="${i}" placeholder="כתבו בעברית..." style="direction:rtl;text-align:right;" ${status==='correct'||status==='locked'?'disabled':''}>${savedVal}</textarea>
+      <div class="feedback-text" id="tranhe-fb-${i}"></div>`;
+    el.appendChild(div);
+    const ta = div.querySelector('textarea');
+    if (status === 'correct') { ta.classList.add('correct'); }
+    else if (status === 'locked') { ta.classList.add('wrong'); ta.value = s.answer; }
+    ta.addEventListener('input', () => setS('tranhe_val_' + i, ta.value));
+  });
+}
+function checkTranslateHe() {
+  translateHeSentences.forEach((s, i) => {
+    const ta = document.querySelector(`#translate-he textarea[data-idx="${i}"]`);
+    if (!ta || ta.disabled) return;
+    const status = getS('tranhe_' + i, '');
+    if (status === 'correct' || status === 'locked') return;
+    const att = getS('tranhe_att_' + i, 0);
+    const ok = s.accept.some(a => {
+      const ni = ta.value.trim().replace(/[.!?]/g,'');
+      const na = a.trim();
+      return ni === na || levenshtein(ni, na) <= 2;
+    });
+    const fb = document.getElementById('tranhe-fb-' + i);
+    if (ok) {
+      ta.classList.add('correct'); ta.disabled = true;
+      setS('tranhe_' + i, 'correct');
+      if (fb) { fb.textContent = '✅ נכון!'; fb.className = 'feedback-text ok'; }
+    } else {
+      const newAtt = att + 1;
+      setS('tranhe_att_' + i, newAtt);
+      if (newAtt >= 2) {
+        ta.value = s.answer; ta.classList.add('wrong'); ta.disabled = true;
+        setS('tranhe_' + i, 'locked');
+        if (fb) { fb.textContent = `❌ תשובה: ${s.answer}`; fb.className = 'feedback-text err'; }
+      } else {
+        ta.classList.add('wrong');
+        setTimeout(() => ta.classList.remove('wrong'), 600);
+        if (fb) { fb.textContent = `⚠️ נסיון ${newAtt}/2`; fb.className = 'feedback-text err'; }
+      }
+    }
+  });
+}
+
+// ============================================================
+// MCQ
+// ============================================================
+function initMCQ() {
+  const el = document.getElementById('mcq-container');
+  el.innerHTML = '';
+  mcqData.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'mcq-item';
+    const status = getS('mcq_' + i, '');
+    div.innerHTML = `<div class="q">${i+1}. ${q.q}</div><div class="mcq-options"></div>`;
+    const opts = div.querySelector('.mcq-options');
+    q.opts.forEach(opt => {
+      const btn = document.createElement('div');
+      btn.className = 'mcq-opt';
+      btn.textContent = opt;
+      if (status === 'correct') {
+        if (opt === q.ans) btn.classList.add('correct');
+        else btn.classList.add('locked');
+      } else if (status === 'wrong') {
+        if (opt === q.ans) btn.classList.add('correct');
+        else btn.classList.add('locked');
+      } else {
+        btn.addEventListener('click', () => handleMCQ(i, opt, q.ans, btn, opts));
+      }
+      opts.appendChild(btn);
+    });
+    el.appendChild(div);
+  });
+}
+function handleMCQ(i, chosen, correct, btn, optsEl) {
+  const attKey = 'mcq_att_' + i;
+  const att = getS(attKey, 0);
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    optsEl.querySelectorAll('.mcq-opt').forEach(b => { if (b !== btn) b.classList.add('locked'); });
+    setS('mcq_' + i, 'correct');
+  } else {
+    const newAtt = att + 1;
+    setS(attKey, newAtt);
+    btn.classList.add('wrong');
+    setTimeout(() => btn.classList.remove('wrong','selected'), 600);
+    if (newAtt >= 2) {
+      optsEl.querySelectorAll('.mcq-opt').forEach(b => {
+        b.classList.add('locked');
+        if (b.textContent === correct) b.classList.add('correct');
+      });
+      setS('mcq_' + i, 'wrong');
+    }
+  }
+}
+
+// ============================================================
+// VERB EXERCISE
+// ============================================================
+function initVerbExercise() {
+  const el = document.getElementById('verb-exercise');
+  const chipsEl = document.getElementById('verbbank-chips');
+  el.innerHTML = '';
+  chipsEl.innerHTML = '';
+  verbBank.forEach(v => {
+    const chip = document.createElement('span');
+    chip.className = 'verb-chip';
+    chip.textContent = v;
+    chip.id = 'vchip-' + v;
+    chipsEl.appendChild(chip);
+  });
+  verbExercise.forEach((v, i) => {
+    const div = document.createElement('div');
+    div.className = 'fill-item';
+    const status = getS('verb_' + i, '');
+    const savedVal = getS('verb_val_' + i, '');
+    div.innerHTML = `
+      <span class="num">${i+1}.</span>
+      <span style="direction:ltr;font-weight:700;min-width:60px;">${v.present}</span>
+      <span style="color:var(--gray);font-size:0.85rem;">→</span>
+      <input type="text" class="fill-input" placeholder="עבר..." data-idx="${i}" value="${savedVal}" style="width:120px;" ${status==='correct'||status==='locked'?'disabled':''}>
+      <span style="color:var(--gray);font-size:0.85rem;">(${v.heb})</span>`;
+    el.appendChild(div);
+    const inp = div.querySelector('input');
+    if (status === 'correct') { inp.classList.add('correct'); }
+    else if (status === 'locked') { inp.classList.add('wrong'); inp.value = v.past; }
+    inp.addEventListener('input', () => setS('verb_val_' + i, inp.value));
+  });
+  // grey chips
+  verbExercise.forEach((v, i) => {
+    const status = getS('verb_' + i, '');
+    if (status) {
+      const chip = document.getElementById('vchip-' + v.past);
+      if (chip) chip.classList.add('used');
+    }
+  });
+}
+function checkVerbs() {
+  verbExercise.forEach((v, i) => {
+    const inp = document.querySelector(`#verb-exercise input[data-idx="${i}"]`);
+    if (!inp || inp.disabled) return;
+    const status = getS('verb_' + i, '');
+    if (status === 'correct' || status === 'locked') return;
+    const att = getS('verb_att_' + i, 0);
+    const ok = fuzzyMatch(inp.value, v.past, null);
+    if (ok) {
+      inp.classList.add('correct'); inp.disabled = true;
+      setS('verb_' + i, 'correct'); setS('verb_val_' + i, inp.value);
+      const chip = document.getElementById('vchip-' + v.past);
+      if (chip) chip.classList.add('used');
+    } else {
+      const newAtt = att + 1;
+      setS('verb_att_' + i, newAtt);
+      inp.classList.add('wrong');
+      setTimeout(() => inp.classList.remove('wrong'), 600);
+      if (newAtt >= 2) {
+        inp.value = v.past; inp.classList.add('wrong'); inp.disabled = true;
+        setS('verb_' + i, 'locked'); setS('verb_val_' + i, v.past);
+        const chip = document.getElementById('vchip-' + v.past);
+        if (chip) chip.classList.add('used');
+      }
+    }
+  });
+}
+
+function initVerbTranslate() {
+  const el = document.getElementById('verb-translate');
+  el.innerHTML = '';
+  verbTranslateSentences.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'translate-item';
+    const status = getS('verbtran_' + i, '');
+    const savedVal = getS('verbtran_val_' + i, '');
+    div.innerHTML = `
+      <div class="source" style="direction:rtl">${s.heb}</div>
+      <textarea data-idx="${i}" placeholder="Write in English..." ${status==='correct'||status==='locked'?'disabled':''}>${savedVal}</textarea>
+      <div class="feedback-text" id="verbtran-fb-${i}"></div>`;
+    el.appendChild(div);
+    const ta = div.querySelector('textarea');
+    if (status === 'correct') { ta.classList.add('correct'); }
+    else if (status === 'locked') { ta.classList.add('wrong'); ta.value = s.answer; }
+    ta.addEventListener('input', () => setS('verbtran_val_' + i, ta.value));
+  });
+}
+function checkVerbTranslate() {
+  verbTranslateSentences.forEach((s, i) => {
+    const ta = document.querySelector(`#verb-translate textarea[data-idx="${i}"]`);
+    if (!ta || ta.disabled) return;
+    const status = getS('verbtran_' + i, '');
+    if (status === 'correct' || status === 'locked') return;
+    const att = getS('verbtran_att_' + i, 0);
+    const ok = fuzzyMatch(ta.value, s.answer, s.accept);
+    const fb = document.getElementById('verbtran-fb-' + i);
+    if (ok) {
+      ta.classList.add('correct'); ta.disabled = true;
+      setS('verbtran_' + i, 'correct');
+      if (fb) { fb.textContent = '✅ נכון!'; fb.className = 'feedback-text ok'; }
+    } else {
+      const newAtt = att + 1;
+      setS('verbtran_att_' + i, newAtt);
+      if (newAtt >= 2) {
+        ta.value = s.answer; ta.classList.add('wrong'); ta.disabled = true;
+        setS('verbtran_' + i, 'locked');
+        if (fb) { fb.textContent = `❌ תשובה: ${s.answer}`; fb.className = 'feedback-text err'; }
+      } else {
+        ta.classList.add('wrong');
+        setTimeout(() => ta.classList.remove('wrong'), 600);
+        if (fb) { fb.textContent = `⚠️ נסיון ${newAtt}/2`; fb.className = 'feedback-text err'; }
+      }
+    }
+  });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+loadState();
+initMatch();
+initFill();
+initTranslateEn();
+initTranslateHe();
+initMCQ();
+initVerbExercise();
+initVerbTranslate();
+</script>
+</body>
+</html>
